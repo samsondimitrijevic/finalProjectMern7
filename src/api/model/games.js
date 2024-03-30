@@ -4,6 +4,7 @@ const gameSchema = new mongoose.Schema(
   {
     title: { type: String, required: true, trim: true },
     image: { type: String, required: true, trim: true },
+    id_Platform: [{ type: mongoose.Types.ObjectId, ref: "platforms" }],
     platforms: [
       {
         type: String,

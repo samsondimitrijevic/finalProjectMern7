@@ -21,7 +21,7 @@ const createGame = async (req, res, next) => {
 // GET (read)
 const getAllGames = async (req, res, next) => {
   try {
-    const allGames = await Game.find();
+    const allGames = await Game.find().populate("platforms");
     return res.status(200).json(allGames);
   } catch (err) {
     return next(setError(400, err));
@@ -32,7 +32,7 @@ const getAllGames = async (req, res, next) => {
 const getGameById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const game = await Game.findById(id);
+    const game = await Game.findById(id).populate("platforms");
     return res.status(200).json(game);
   } catch (err) {
     return next(setError(400, err));

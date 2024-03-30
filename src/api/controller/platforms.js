@@ -20,7 +20,7 @@ const createPlatform = async (req, res, next) => {
 // GET (read)
 const getAllPlatforms = async (req, res, next) => {
   try {
-    const allPlatforms = await Platform.find().populate("games", "title stock");
+    const allPlatforms = await Platform.find().populate("games");
     return res.status(201).json(allPlatforms);
   } catch (err) {
     return next(setError(400, err));
