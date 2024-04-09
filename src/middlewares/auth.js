@@ -19,7 +19,7 @@ const isAuthentificated = async (req, res, next) => {
     req.user = userLoggedIn;
     next();
   } catch (err) {
-    return next(setError(400, err));
+    return next(setError(401, err));
   }
 };
 
