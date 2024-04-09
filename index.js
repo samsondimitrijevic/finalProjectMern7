@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("./src/config/db");
 const { setError } = require("./src/config/error");
 const { indexRouter } = require("./src/api/routes/indexRouter");
@@ -7,6 +8,7 @@ require("dotenv").config();
 require("./src/config/cloudinary");
 
 const app = express();
+app.use(cors());
 
 const limiter = rateLimit({
   windowMs: 3 * 60 * 1000, // 15 minutes
