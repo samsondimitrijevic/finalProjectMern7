@@ -7,37 +7,31 @@ const register = async (req, res, next) => {
   try {
     const { userName, password } = req.body;
 
-    // Specific password required for registration
-    const specificPassword = "Qw60$gofsam24";
+    // Regex pattern to validate password
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    // Check if the provided password matches the specific password
-    if (password !== specificPassword) {
-      return res.status(400).json({
-        error: "Incorrect password. Please provide the specific password.",
-      });
+    // Check if the provided password matches the regex pattern
+    if (!passwordRegex.test(password)) {
+      return next(
+        setError(
+          400,
+          "Password must be at least 6 characters long and contain at least one lowercase and one uppercase letter."
+        )
+      );
     }
 
-    // Hash the password
     const hash = await hashPassword(password);
-
-    // Create a new user with the hashed password
     const newUser = new User({ userName, password: hash });
 
-    // Check if the user already exists
     const userExists = await User.findOne({ userName });
 
     if (userExists) {
-      return res.status(400).json({ error: "This user already exists." });
+      return next(setError(400, "This user already exists."));
     }
-
-    // Save the new user
     const user = await newUser.save();
-
-    // Return the user object
     return res.status(201).json(user);
   } catch (error) {
-    // Handle any errors
-    return res.status(400).json({ error: "Can't register user." });
+    return next(setError(400, "Can't register user"));
   }
 };
 

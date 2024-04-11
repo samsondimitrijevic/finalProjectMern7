@@ -10,7 +10,9 @@ This is a Node, Express, and MongoDB project and aims to create a server with tw
 
 Run 'npm start' in the VSCode Terminal to have "Server listening on http://localhost:3001" and "connection to MongoDB".
 The register password has at least 6 characters long, one lowercase and one uppercase.
-Register Password = "Qw60$gofsam24"
+
+An endpoint /auth/register allows registering a new user. The email cannot be repeated!
+Register Password = no matter what password the user enters as long as "the password has at least 6 characters long, one lowercase and one uppercase".
 
 ## Usage
 
@@ -60,6 +62,10 @@ The API is limited to 5' requests every 3 minutes.
 
 When updating a document from the games, I am removing the attached image from Cloudinary!
 The code functions are displayed in PUT under games and controller
+
+## Plugin
+
+| GitHub | https://github.com/samsondimitrijevic/finalProjectMern7.git
 
 ## Contact
 
